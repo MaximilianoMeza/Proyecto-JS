@@ -1,0 +1,7 @@
+{
+  "name": "ninja-app",
+  "short_name": "ninja-app",
+  "description": "TP Final de Javascrip + HTML y CSS",
+  "start_url": "/",
+  "display": "standalone"
+}

@@ -1,0 +1,46 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+
+<dom-module id="app-ninja">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Hello [[prop1]]!</h2>
+
+    <iron-ajax url="https://techcodewars.herokuapp.com/api/v1/users/elpela75" handle-as="json" last-response="{{user}}" loading="{{loading}}"
+    auto></iron-ajax>
+
+
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class AppNinja extends Polymer.Element {
+      static get is() { return 'app-ninja'; }
+      static get properties() {
+        return {
+          cargando: {
+            type: Boolean,
+            value: false
+          },
+          desplegado: {
+              type: Boolean,
+              value: false
+          },
+          usuario: {
+            type: String,
+            value: ""
+          }
+        };
+      }
+    }
+
+    window.customElements.define(AppNinja.is, AppNinja);
+  </script>
+</dom-module>
