@@ -1,0 +1,53 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="detalle-lenguaje">
+
+    <template>
+        <style>
+            :host .card * { margin: 0; padding: 0; box-sizing: border-box; }
+            li { list-style: none; }
+            .card h1 { margin-bottom: 10px; }
+            .card ul li:not(:last-child) { margin-bottom: 5px; }
+            
+        </style> 
+        <div class="card">
+            <h2>[[lenguaje]]</h2>
+            <ul>
+                <li><span>Ranking: </span>[[ranking]]</li>
+                <li><span>Puesto: </span>[[nombre]]</li>
+                <li><span>Level: </span>[[color]]</li>
+                <li><span>Score: </span>[[score]]</li>
+            </ul>
+        </div>
+    </template>
+    
+    <script>
+    
+    class DetalleLenguaje extends Polymer.Element {
+      static get is() { return 'detalle-lenguaje'; }
+      static get properties() {
+            return {
+            lenguaje:{
+             type: String,
+             observer: "_toUpper",   
+            }, 
+            ranking: String,
+            nombre: String,
+            color: String,
+            score: Number
+            }
+        };
+
+        _toUpper(){
+            if (this.lenguaje != undefined){
+            this.lenguaje = this.lenguaje.toUpperCase();
+            }
+            
+        }
+    }
+              
+      window.customElements.define(DetalleLenguaje.is, DetalleLenguaje);
+    
+    </script>
+
+</dom-module>

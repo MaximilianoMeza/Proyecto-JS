@@ -1,6 +1,8 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
 
+<link rel="import" href="../../src/detalle-usuario/detalle-usuario.html">
+
 <dom-module id="app-ninja">
   <template>
     <style>
@@ -10,9 +12,14 @@
     </style>
     <h2>Consulta Ninja BBVA</h2>
 
-    <iron-ajax url="https://techcodewars.herokuapp.com/api/v1/users/pablo.inchausti" handle-as="json" last-response="{{user}}" loading="{{loading}}"
+    <iron-ajax url="https://techcodewars.herokuapp.com/api/v1/users/pablo.inchausti" handle-as="json" last-response="{{usuario}}" loading="{{loading}}"
     auto></iron-ajax>
 
+    <!-- <template is="dom-if" if="[[_mostrar(usuario,loading)]]"> -->
+       
+    <detalle-usuario usuario=[[usuario]]></detalle-usuario>
+    <!-- <kata-container username=[[user.username]]></kata-container> -->
+      
 
   </template>
 
@@ -35,8 +42,15 @@
           }
         };
       }
+
+      _mostrar(usuario, loading){
+        console.log("paso por _mostrar");
+        console.log(usuario, loading)
+        return usuario && (!loading);
+      }
     }
 
+    
     window.customElements.define(AppNinja.is, AppNinja);
   </script>
 </dom-module>

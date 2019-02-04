@@ -1,0 +1,83 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="../../src/detalle-lenguaje/detalle-lenguaje.html">
+
+<dom-module id="detalle-usuario">
+
+  <template>
+    <style>
+      :host {
+      display: block;
+      max-width: 400px;
+      box-shadow: 0 1px 15px -5px black;
+      padding: 15px;
+      margin-bottom: 20px;
+      }
+      :host .card * { margin: 0; padding: 0; box-sizing: border-box; }
+       li { list-style: none; } 
+      .card h1 { margin-bottom: 10px; } 
+      /* .card ul li:not(:last-child) { margin-bottom: 5px; } */
+    </style>
+    
+      <div class="card">
+        <h1>Hola [[usuario.username]]!</h1>
+
+        <ul>
+          <li>Clan: [[usuario.clan]]</li>          
+          <li>Honor: [[usuario.honor]]</li>
+          <li>LeaderBoard Position: [[usuario.leaderboardPosition]]</li>
+          <li>Skills: [[usuario.skills]]</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2>Ranking Global</h2>
+          <ul>
+            <li><span>Ranking: </span>[[usuario.ranks.overall.rank]]</li>
+            <li><span>Puesto: </span>[[usuario.ranks.overall.name]]</li>
+            <li><span>Level: </span>[[usuario.ranks.overall.color]]</li>
+            <li><span>Score: </span>[[usuario.ranks.overall.score]]</li>
+          </ul>
+      </div>
+            
+      <h2>Ranking por Lenguaje</h2>
+      <template is="dom-repeat" items="[[_toArray(usuario.ranks.languages)]]">
+        <detalle-lenguaje lenguaje="[[item.title]]" ranking="[[item.value.rank]]" nombre="[[item.value.name]]" color="[[item.value.color]]" score="[[item.value.score]]"></detalle-lenguaje>
+      </template>
+            
+    </template>
+            
+    <script>
+    /**
+    * @customElement
+    * @polymer
+    */
+    
+    class DetalleUsuario extends Polymer.Element {
+      static get is() { return 'detalle-usuario'; }
+      static get properties() {
+        return {
+          usuario: {
+          type: Boolean,
+          notify:true
+        },
+          error: {
+          type: Object,
+          notify:true
+        }
+      };
+      }
+      
+      _toArray(obj) {
+        return Object.keys(obj).map(function(key) {
+          return {
+            title: key,
+            value: obj[key]
+          };
+        });
+      } 
+    }
+              
+      window.customElements.define(DetalleUsuario.is, DetalleUsuario);
+    </script>
+
+</dom-module>
