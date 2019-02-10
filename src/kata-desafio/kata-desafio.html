@@ -1,0 +1,74 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">  
+
+<dom-module id='kata-desafio'>
+    <template>
+        <style>
+        :host {
+          display: block;
+          }
+        </style>
+        <h2>Tus Desafios:</h2>
+        <!-- items="[[filtrarDesafios]]" 
+      <template is="dom-repeat" >   -->
+        <paper-item item-name="javascript">[[desafios[0].name]]</paper-item>
+      <!-- </template> -->
+
+    </template>
+
+    <script>
+    class KataDesafio extends Polymer.Element {
+      static get is() { return 'kata-desafio'; }
+      static get properties() {
+        return {
+          desafios: {
+          type: Array,
+          notify:true,
+          value:[],
+          observe:"_mostrar"
+        },
+        filtrarDesafios:{
+            type:Array,
+            value:[]
+            // computed:"_computeFiltrarDesafios(desafios,lenguaje)"
+        },
+        lenguaje:{
+            type:String,
+            value:""
+        },
+        ultimo: {
+            type: Number,
+            value: 0
+          }
+        };
+      }
+
+      _mostrar(){
+          console.log("ingreso a mostrar")
+          console.log(this.desafios);
+      }
+      _toArray(obj) {
+        return Object.keys(obj).map(function(key) {
+          return {
+            title: key,
+            value: obj[key]
+          };
+        });
+      } 
+
+      _computeFiltrarDesafios(data, lenguaje) {
+          console.log("ingreso a filtrar desafios",data,lenguaje)
+
+        var arrayfiltrado= data.filter(kata => kata.completedLanguages(0) == lenguaje);
+
+        console.log("termino de filtrar",arrayfiltrado);
+        return arrayfiltrado
+      }
+
+    }
+    window.customElements.define(KataDesafio.is, KataDesafio);
+
+    
+    </script>
+
+</dom-module>

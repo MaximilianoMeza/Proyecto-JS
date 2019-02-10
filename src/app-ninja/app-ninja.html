@@ -1,5 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../../bower_components/paper-spinner/paper-spinner.html">
 
 <link rel="import" href="../../src/detalle-usuario/detalle-usuario.html">
 
@@ -12,15 +13,13 @@
     </style>
     <h2>Consulta Ninja BBVA</h2>
 
-    <iron-ajax url="https://techcodewars.herokuapp.com/api/v1/users/pablo.inchausti" handle-as="json" last-response="{{usuario}}" loading="{{loading}}"
-    auto></iron-ajax>
-
-    <!-- <template is="dom-if" if="[[_mostrar(usuario,loading)]]"> -->
-       
+    <iron-ajax url="https://techcodewars.herokuapp.com/api/v1/users/pablo.inchausti" handle-as="json" last-response="{{usuario}}" loading="{{loadinguser}}" auto></iron-ajax>
+   
+    <paper-spinner class="spinner" active="[[loadinguser]]"></paper-spinner>
     <detalle-usuario usuario=[[usuario]]></detalle-usuario>
     <!-- <kata-container username=[[user.username]]></kata-container> -->
-      
 
+    
   </template>
 
   <script>
@@ -34,15 +33,31 @@
         return {
           loading: {
             type: Boolean,
+            value: false,
+            computed:"_computeLoading(loadinguser,loadingkata)"
+          },
+          loadinguser: {
+            type: Boolean,
+            value: false
+          },
+          loadingkata: {
+            type: Boolean,
             value: false
           },
           usuario: {
+            type: String,
+            value: ""
+          },
+          desafios: {
             type: String,
             value: ""
           }
         };
       }
 
+      _computeLoading(lu,lk){
+        return lu&&lk;
+      }
       _mostrar(usuario, loading){
         return usuario && (!loading);
       }

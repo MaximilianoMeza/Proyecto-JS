@@ -1,4 +1,8 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../../bower_components/paper-spinner/paper-spinner.html">
+<link rel="import" href="../../src/kata-desafio/kata-desafio.html">
+
 
 <link rel="import" href="../../src/detalle-lenguaje/detalle-lenguaje.html">
 
@@ -20,7 +24,7 @@
     </style>
     
       <div class="card">
-        <h1>Hola [[usuario.username]]!</h1>
+        <h1>Hola [[nombreUsuario]]!</h1>
 
         <ul>
           <li>Clan: [[usuario.clan]]</li>          
@@ -39,11 +43,24 @@
           </ul>
       </div>
             
-      <h2>Ranking por Lenguaje</h2>
+      <h2>Ranking por Lenguaje:</h2>
       <template is="dom-repeat" items="[[_toArray(usuario.ranks.languages)]]">
         <detalle-lenguaje lenguaje="[[item.title]]" ranking="[[item.value.rank]]" nombre="[[item.value.name]]" color="[[item.value.color]]" score="[[item.value.score]]"></detalle-lenguaje>
       </template>
-            
+
+      <iron-ajax url="https://techcodewars.herokuapp.com/api/v1/users/pablo.inchausti/code-challenges/completed" handle-as="json" last-response="{{desafios}}" loading="{{loadingkata}}" auto></iron-ajax>   
+      <paper-spinner class="spinner" active="[[loadingkata]]"></paper-spinner>            
+      <kata-desafio desafios="[[desafios.data]]" lenguaje="javascript" ultimo=5 ></katas-trophy-challenges>
+        
+        <!-- <template is="dom-if" if="[[loadingdd]]">
+          <paper-spinner class="spinner" active="[[loadingdd]]"></paper-spinner>
+        </template>
+
+        <h3>Detalle del desafio seleccionado:</h3>
+
+        <template is="dom-if" if="[[!loadingdd]]">          
+          <div>[[selectedChallengeDetails.description]]</div>
+        </template>       -->
     </template>
             
     <script>
@@ -58,8 +75,16 @@
         return {
           usuario: {
           type: Boolean,
-          notify:true
-        },
+          notify:true,
+          observer:"_toUpper"
+          },
+          nombreUsuario:{
+            type: String,
+          },
+          desafios:{
+          type:String,
+          value:""
+          },
           error: {
           type: Object,
           notify:true
@@ -67,6 +92,13 @@
       };
       }
       
+      _toUpper(){
+            if (this.usuario.username != undefined){
+            this.nombreUsuario = this.usuario.username.toUpperCase();
+            }
+            
+        }
+
       _toArray(obj) {
         return Object.keys(obj).map(function(key) {
           return {
