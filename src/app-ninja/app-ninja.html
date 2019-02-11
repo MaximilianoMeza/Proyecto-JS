@@ -16,8 +16,9 @@
     <iron-ajax url="https://techcodewars.herokuapp.com/api/v1/users/pablo.inchausti" handle-as="json" last-response="{{usuario}}" loading="{{loadinguser}}" auto></iron-ajax>
    
     <paper-spinner class="spinner" active="[[loadinguser]]"></paper-spinner>
+    
     <detalle-usuario usuario=[[usuario]]></detalle-usuario>
-    <!-- <kata-container username=[[user.username]]></kata-container> -->
+   
 
     
   </template>

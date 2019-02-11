@@ -1,23 +1,26 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">  
 
 <dom-module id="detalle-lenguaje">
 
     <template>
         <style>
-            :host .card * { margin: 0; padding: 0; box-sizing: border-box; }
+            :host .card * { margin: 5px; padding: 0; box-sizing: border-box; }
             li { list-style: none; }
             .card h1 { margin-bottom: 10px; }
             .card ul li:not(:last-child) { margin-bottom: 5px; }
             
         </style> 
         <div class="card">
-            <h2>[[lenguaje]]</h2>
+            
+            <paper-item><h2>[[lenguaje]]</h2></paper-item>
             <ul>
                 <li><span>Ranking: </span>[[ranking]]</li>
                 <li><span>Puesto: </span>[[nombre]]</li>
                 <li><span>Level: </span>[[color]]</li>
                 <li><span>Score: </span>[[score]]</li>
             </ul>
+            
         </div>
     </template>
     
