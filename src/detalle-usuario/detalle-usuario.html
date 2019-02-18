@@ -2,8 +2,7 @@
 <link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="../../bower_components/paper-spinner/paper-spinner.html">
 <link rel="import" href="../../src/kata-desafio/kata-desafio.html">
-
-
+<link rel="import" href="../../src/kata-enunciado/kata-enunciado.html">
 <link rel="import" href="../../src/detalle-lenguaje/detalle-lenguaje.html">
 
 <dom-module id="detalle-usuario">
@@ -44,14 +43,23 @@
       </div>
             
       <h2>Ranking por Lenguaje:</h2>
+      
       <template is="dom-repeat" items="[[_toArray(usuario.ranks.languages)]]">
-        <detalle-lenguaje lenguaje="[[item.title]]" ranking="[[item.value.rank]]" nombre="[[item.value.name]]" color="[[item.value.color]]" score="[[item.value.score]]"></detalle-lenguaje>
+        <detalle-lenguaje lenguaje="[[item.title]]" ranking="[[item.value.rank]]" nombre="[[item.value.name]]" color="[[item.value.color]]" score="[[item.value.score]]" onclick="_prueba"></detalle-lenguaje>
       </template>
+      
 
       <iron-ajax url="https://techcodewars.herokuapp.com/api/v1/users/pablo.inchausti/code-challenges/completed" handle-as="json" last-response="{{desafios}}" loading="{{loadingkata}}" auto></iron-ajax>   
-      <paper-spinner class="spinner" active="[[loadingkata]]"></paper-spinner>            
-      <kata-desafio desafios="[[desafios.data]]" lenguaje="javascript" ultimo=5 ></katas-trophy-challenges>
+      
         
+      
+        <kata-desafio desafios="[[desafios.data]]" lenguaje="javascript" ultimo=5 ></katas-desafio>
+
+        <paper-spinner class="spinner" active="[[loadingkata]]"></paper-spinner>            
+
+        
+      <kata-enunciado id="54b724efac3d5402db00065e"></kata-enunciado>
+      
         <!-- <template is="dom-if" if="[[loadingdd]]">
           <paper-spinner class="spinner" active="[[loadingdd]]"></paper-spinner>
         </template>
@@ -88,7 +96,7 @@
           error: {
           type: Object,
           notify:true
-        }
+          }
       };
       }
       

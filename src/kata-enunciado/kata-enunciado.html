@@ -1,0 +1,51 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../../bower_components/paper-spinner/paper-spinner.html">  
+
+<dom-module id='kata-enunciado'>
+    <template>
+        <style>
+        :host {
+          display: block;
+          }
+        </style>
+        <h2>Enunciado:</h2>
+
+        <iron-ajax id="enunciadoKata" url="https://techcodewars.herokuapp.com/api/v1/code-challenges/[[id]]" handle-as="json" 
+        last-response="{{enunciado}}" loading="{{loadingenun}}" auto></iron-ajax>
+
+        <paper-spinner class="spinner" active="[[loadingenun]]"></paper-spinner>
+
+        <div>{{enunciado}}</div>
+
+    </template>
+
+    <script>
+    class KataEnunciado extends Polymer.Element {
+      static get is() { return 'kata-enunciado'; }
+      static get properties() {
+        return {
+        id:{
+            type:String,
+            value:"54b724efac3d5402db00065e"
+        },
+        ultimo: {
+            type: Number,
+            value: 0
+        },
+        loadingenun:{
+            type:Boolean,
+            value:false
+        }
+      };
+         
+    }
+      
+
+    }
+    window.customElements.define(KataEnunciado.is, KataEnunciado);
+    
+    
+    </script>
+
+</dom-module>

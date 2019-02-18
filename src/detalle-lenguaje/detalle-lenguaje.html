@@ -11,15 +11,29 @@
             .card ul li:not(:last-child) { margin-bottom: 5px; }
             
         </style> 
-        <div class="card">
-            
-            <paper-item><h2>[[lenguaje]]</h2></paper-item>
-            <ul>
+        <div role="listbox">
+            <!-- <paper-item>    ---class="cards"
+                <paper-item-body two-line>
+                  <div>Profile Photo</div>
+                  <div secondary>Change your Google+ profile photo</div>
+                </paper-item-body>
+              </paper-item> -->
+            <paper-item>
+                
+                <paper-item-body two-line>
+                    <div><h2>[[lenguaje]]</h2></div>
+                    <div secondary><span>Ranking: </span>[[ranking]]</li></div>
+                    <div secondary><span>Puesto: </span>[[nombre]]</div>
+                    <div secondary><span>Level: </span>[[color]]</div>
+                    <div secondary><span>Score: </span>[[score]]</div>
+                </paper-item-body>
+            </paper-item>
+            <!-- <ul>
                 <li><span>Ranking: </span>[[ranking]]</li>
                 <li><span>Puesto: </span>[[nombre]]</li>
                 <li><span>Level: </span>[[color]]</li>
                 <li><span>Score: </span>[[score]]</li>
-            </ul>
+            </ul> -->
             
         </div>
     </template>
