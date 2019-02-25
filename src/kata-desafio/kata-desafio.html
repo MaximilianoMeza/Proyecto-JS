@@ -14,8 +14,7 @@
         is="dom-repeat" 
         items="{{desafios}}" 
         as="desafio" 
-        filter="{{computeFilter(lenguaje)}}"
-      >   
+        filter="isFilter" >   
           <paper-item item-name="[[desafio.id]]" >[[desafio.name]]</paper-item>
       </template> 
       <!-- <h3>Detalle del desafio seleccionado:</h3>
@@ -35,8 +34,12 @@
         return {
           desafios: {
           type: Array,
-          notify:true,
           value:[]
+        },
+        desafioFiltado:{
+            type:Array,
+            value:[],
+            computed: '_computeDesafios(desafios,lenguaje)'
         },
         lenguaje:{
             type:String,
@@ -48,30 +51,38 @@
           }
         };
       }
+      // _toArray(obj) {
+      //   return Object.keys(obj).map(function(key) {
+      //     return {
+      //       title: key,
+      //       value: obj[key]
+      //     };
+      //   });
+      // } 
 
-      _toArray(obj) {
-        return Object.keys(obj).map(function(key) {
-          return {
-            title: key,
-            value: obj[key]
-          };
-        });
-      } 
+      _computeDesafios(desafios, languaje) {
+        function filtro(elem) {
+          return (elem.completedLanguages.indexOf(languaje) > -1)||(languaje==='all');
+        }
+        if(Array.isArray(desafios)) desafios = desafios.filter(filtro);
+        return desafios;
+      }
 
-      computeFilter(string) {
-        console.log("ingreso a filtrar desafios")
-                if (!string) {
-                    // set filter to null to disable filtering
-                    return null;
-                } else {
-                    // return a filter function for the current search string
-                    string = string.toLowerCase();
-                    return function (desafio) {
-                        var first = desafio.completedLanguages[0].toString() ;
-                        return first.indexOf(string) ;
-                    };
-                }
-            }
+      isFilter(desafio) {
+        if (!desafio) {
+                // set filter to null to disable filtering
+          return null;
+        } else {
+          console.log("desafio1", desafio)
+          let leng = desafio.completedLanguages[0];
+          return (leng.indexOf(this.lenguaje) != -1) ;
+                    
+        }
+                    
+      }             
+                    
+                
+            
 
     }
     window.customElements.define(KataDesafio.is, KataDesafio);

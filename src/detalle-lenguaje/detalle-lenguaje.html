@@ -12,12 +12,6 @@
             
         </style> 
         <div role="listbox">
-            <!-- <paper-item>    ---class="cards"
-                <paper-item-body two-line>
-                  <div>Profile Photo</div>
-                  <div secondary>Change your Google+ profile photo</div>
-                </paper-item-body>
-              </paper-item> -->
             <paper-item>
                 
                 <paper-item-body two-line>
@@ -28,12 +22,6 @@
                     <div secondary><span>Score: </span>[[score]]</div>
                 </paper-item-body>
             </paper-item>
-            <!-- <ul>
-                <li><span>Ranking: </span>[[ranking]]</li>
-                <li><span>Puesto: </span>[[nombre]]</li>
-                <li><span>Level: </span>[[color]]</li>
-                <li><span>Score: </span>[[score]]</li>
-            </ul> -->
             
         </div>
     </template>
@@ -61,7 +49,17 @@
             }
             
         }
+
+        _prueba(item){
+            if (!item){
+            return null;
+            }else{
+            console.log("item", item)  
+            }
+      }
     }
+
+    
               
       window.customElements.define(DetalleLenguaje.is, DetalleLenguaje);
     

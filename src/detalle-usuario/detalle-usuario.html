@@ -49,17 +49,7 @@
       </template>
       
 
-      <iron-ajax url="https://techcodewars.herokuapp.com/api/v1/users/pablo.inchausti/code-challenges/completed" handle-as="json" last-response="{{desafios}}" loading="{{loadingkata}}" auto></iron-ajax>   
-      
-        
-      
-        <kata-desafio desafios="[[desafios.data]]" lenguaje="javascript" ultimo=5 ></katas-desafio>
-
-        <paper-spinner class="spinner" active="[[loadingkata]]"></paper-spinner>            
-
-        
-      <kata-enunciado id="54b724efac3d5402db00065e"></kata-enunciado>
-      
+           
         <!-- <template is="dom-if" if="[[loadingdd]]">
           <paper-spinner class="spinner" active="[[loadingdd]]"></paper-spinner>
         </template>
@@ -89,17 +79,22 @@
           nombreUsuario:{
             type: String,
           },
-          desafios:{
-          type:String,
-          value:""
-          },
           error: {
           type: Object,
+          notify:true
+          },
+          lenguaje: {
+          type: String,
+          value:"",
           notify:true
           }
       };
       }
       
+      
+            
+        
+
       _toUpper(){
             if (this.usuario.username != undefined){
             this.nombreUsuario = this.usuario.username.toUpperCase();
